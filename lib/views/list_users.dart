@@ -1,24 +1,28 @@
+import 'package:cadastro_contatos_flutter/provider/users_provider.dart';
 import 'package:cadastro_contatos_flutter/widget/users_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:cadastro_contatos_flutter/data/database_users.dart';
-
+import 'package:provider/provider.dart';
 
 class UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    final usuarios = {...DUMMY_USERS};
+    final UserProvider usuarios = Provider.of(context);
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Users'),
+        title: const Text('Users'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: (){
+              },
+          ),
+        ],
       ),
-
-          body: ListView.builder(
-            itemCount: usuarios.length,
-            itemBuilder: (ctx, i) => UserTile(usuarios.values.elementAt(i)),
-            ),
-      
+      body: ListView.builder(
+        itemCount: usuarios.count,
+        itemBuilder: (ctx, i) => UserTile(usuarios.byIndex(i)),
+      ),
     );
   }
 }
